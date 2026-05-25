@@ -73,6 +73,7 @@ class Agent:
             #load the model from saved one
             policy_dqn.load_state_dict(torch.load(self.MODEL_FILE))
             policy_dqn.eval()
+            epsilon=0
 
         for episode in itertools.count():
             state,_=env.reset()
@@ -117,7 +118,7 @@ class Agent:
                 state=next_state
                 episode_rewards+=reward.item()
 
-            print(f"For episode={episode+1}, reward={episode_rewards} & epsilon")
+            print(f"For episode={episode+1}, reward={episode_rewards} & epsilon={epsilon}")
 
             if is_training:
                 #epsilon_decay
